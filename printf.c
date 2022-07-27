@@ -58,7 +58,10 @@ int printf(const char *format, ...)
     va_start(va, format);
 
     emit_func_t emit_func = printf_claim_stdio();
-    printf_inner(format, va, emit_func);
+    if (emit_func)
+    {
+        printf_inner(format, va, emit_func);
+    } 
     printf_release_stdio(emit_func);
 
     va_end(va);
